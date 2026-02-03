@@ -1,0 +1,287 @@
+/* =========================================
+   1. Base & Global Styles
+   ========================================= */
+body {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Mengaktifkan transisi halus antar halaman (jika didukung browser) */
+@view-transition {
+  navigation: auto;
+}
+
+/* =========================================
+   2. Backgrounds & Hero Section (OPTIMIZED)
+   ========================================= */
+.hero-bg {
+  /* Menggunakan Radial Gradient Statis (Lebih ringan daripada Linear Animated) */
+  background: radial-gradient(circle at 50% 10%, #2e1065 0%, #0f0524 80%);
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-pattern {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  height: 100%;
+  
+  /* Membuat garis grid tipis (Statis/Diam) */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  
+  background-size: 50px 50px;
+  
+  /* Efek memudar ke bawah (Fade out) */
+  mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+  
+  z-index: 0;
+  pointer-events: none;
+  
+  /* Animasi dihapus agar tidak berat */
+  animation: none; 
+}
+
+/* =========================================
+   3. Keyframe Animations (YANG PERLU DIHAPUS)
+   ========================================= */
+/* Anda BISA MENGHAPUS @keyframes grid-move dari file css Anda 
+   karena sudah tidak digunakan lagi di background ini. */
+
+/* =========================================
+   4. Utility Classes & Effects
+   ========================================= */
+
+/* Glow Effect Box */
+.glow-box {
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.4), 0 0 100px rgba(168, 85, 247, 0.2), inset 0 0 30px rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: all 0.4s ease;
+}
+
+.glow-box:hover {
+  box-shadow: 0 0 80px rgba(139, 92, 246, 0.6), 0 0 120px rgba(168, 85, 247, 0.3), inset 0 0 40px rgba(139, 92, 246, 0.15);
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card-hover:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3), 0 0 60px rgba(168, 85, 247, 0.15);
+}
+
+.card-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(139, 92, 246, 0.1));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-hover:hover::before {
+  opacity: 1;
+}
+
+/* Text Gradient & Animation */
+.text-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 25%, #c084fc 50%, #e879f9 75%, #f0abfc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+  background-size: 200% 200%;
+  will-change: transform, opacity;
+}
+
+/* Floating Animation Class */
+.float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+  filter: box-shadow(0 10px 30px rgba(139, 92, 246, 0.4)) box-shadow(0 0 20px rgba(168, 85, 247, 0.3));
+}
+
+.animate-float-slow {
+  will-change: transform, opacity;
+}
+
+/* Pulse Animation Class */
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Fade In Up Class (Triggered by JS) */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Glass Navigation Bar */
+.nav-glass {
+  background: linear-gradient(135deg, rgba(15, 5, 36, 0.92) 0%, rgba(15, 5, 36, 0.85) 100%);
+  backdrop-filter: blur(10px) saturate(180%);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 16px rgba(139, 92, 246, 0.1);
+}
+
+/* Section Divider Line */
+.section-divider {
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(139, 92, 246, 0.3) 10%,
+    rgba(168, 85, 247, 0.6) 30%,
+    rgba(192, 132, 252, 0.8) 50%,
+    rgba(168, 85, 247, 0.6) 70%,
+    rgba(139, 92, 246, 0.3) 90%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+  border-radius: 2px;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.9), rgba(139, 92, 246, 0.6));
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float-particle 4s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Stat Card */
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+}
+
+.stat-card:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%);
+  border-color: rgba(139, 92, 246, 0.6);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3), 0 0 40px rgba(168, 85, 247, 0.2);
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   5. Modal & Organizational Chart Styles
+   ========================================= */
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b5cf6, #a855f7);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a855f7, #c084fc);
+}
+
+/* Org Card (Structure) */
+.org-card {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.org-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(168, 85, 247, 0.5), rgba(192, 132, 252, 0.5));
+  /* Standard mask for broader browser compatibility */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.org-card:hover::before {
+  opacity: 1;
+}
+
+.org-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(139, 92, 246, 0.4), 0 0 80px rgba(168, 85, 247, 0.3);
+}
+
+/* Connector Line (Structure) */
+.connector-line {
+  position: relative;
+  width: 3px;
+  background: linear-gradient(180deg, 
+    rgba(139, 92, 246, 0.8) 0%,
+    rgba(168, 85, 247, 0.9) 50%,
+    rgba(192, 132, 252, 0.8) 100%
+  );
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(139, 92, 246, 0.4);
+  animation: pulse-line 2s ease-in-out infinite;
+}
+
+/* Rank Badge (Structure) */
+.rank-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   6. Media Queries & Performance Optimization
+   ========================================= */
+@media (max-width: 768px) {
+  /* Matikan animasi berat di mobile */
+  .animate-float-slow, .grid-pattern, .text-gradient {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Hilangkan blur yang berat di HP */
+  .blur-3xl, .blur-2xl {
+    display: none !important;
+  }
+
+  /* Perilaku khusus untuk device low-end */
+  .low-end-device .animate-float-slow,
+  .low-end-device .grid-pattern,
+  .low-end-device .blur-3xl {
+    animation: none !important;
+    filter: none !important; 
+  }
+}
