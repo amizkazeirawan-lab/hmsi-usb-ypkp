@@ -416,6 +416,10 @@ const bidangData = {
               nim: '1.3.23.04.16'
             },
             {
+              name: 'Aldi Surya Putra',
+              nim: '1.3.24.05.19'
+            },
+            {
               name: 'Marsa Raihhadatul',
               nim: '1.3.24.05.18'
             }
